@@ -48,6 +48,3 @@ def recent_predictions():
         return json.dumps({"recent_predictions": recent_ten})
     except Exception as error:
         return json.dumps({"error": f"REQUEST FAILED because {error}"}), 400  
-    
-if __name__ == '__main__':
-    app.run()    
