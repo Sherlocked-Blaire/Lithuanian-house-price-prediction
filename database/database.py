@@ -1,4 +1,4 @@
-import configparser
+from decouple import config
 import json
 import pandas as pd
 import psycopg2
@@ -6,21 +6,12 @@ import psycopg2.extras as extras
 
 
 class Database:   
-    config = configparser.ConfigParser()
-    config.read("config.ini")
-    db_param = config['postgresql']
-    user = db_param["user"]
-    password = db_param["password"]
-    host = db_param["host"]
-    port = int(db_param["port"])
-    database = db_param["database"]
     connection = psycopg2.connect(
-        host=host,
-        user=user,
-        port=port,
-        database=database,
-        password=password
-    )
+    host=config("host"),
+    user=config("user"),
+    port=config("port"),
+    database=config("database"),
+    password=config("password"))
     connection.autocommit = True
     cursor = connection.cursor()
     
