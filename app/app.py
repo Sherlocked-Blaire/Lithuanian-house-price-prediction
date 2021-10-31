@@ -1,6 +1,3 @@
-
-import sys
-sys.path.insert(0, 'C:\\Users\\USER\\Projects\\Lithuanian-house-price-prediction')
 from database.database import Database
 from flask import Flask
 from flask import request
@@ -8,16 +5,20 @@ import json
 from model.process_input import process_input
 import pickle
 
+
 database = Database()
-saved_model_path ="C:\\Users\\USER\\Projects\\Lithuanian-house-price-prediction\\model\\model.pkl"
+saved_model_path ="model/model.pkl"
 with open(saved_model_path, "rb") as file:
     model = pickle.load(file)
     
+    
 app = Flask(__name__)
+
 
 @app.route('/')
 def home()-> str:
     return "This is a price prediction"
+
       
 @app.route("/predict", methods=["POST"])
 def predict() -> str:
@@ -36,6 +37,7 @@ def predict() -> str:
     except Exception as error:
         print(error)
         return json.dumps({"error": "PREDICTION FAILED"}), 500
+    
 
 @app.route("/recent_predictions", methods=["GET"])
 def recent_predictions():
