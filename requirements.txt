@@ -63,7 +63,9 @@ pyppeteer==0.2.6
 pyquery==1.4.3
 pyrsistent==0.18.0
 python-dateutil==2.8.2
+python-decouple==3.5
 pytz==2021.1
+pywin32==301
 pyzmq==22.2.1
 queuelib==1.6.1
 requests==2.26.0
@@ -83,6 +85,7 @@ tornado==6.1
 tqdm==4.62.3
 traitlets==5.1.0
 Twisted==21.7.0
+twisted-iocpsupport==1.0.1
 typing-extensions==3.10.0.0
 urllib3==1.26.6
 useragent==0.1.1
