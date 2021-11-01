@@ -14,8 +14,7 @@ class Database:
     password=config("password"))
     connection.autocommit = True
     cursor = connection.cursor()
-    
-   
+  
     
     def setup_table(self):
         input_and_output_table_query = """ CREATE TABLE IF NOT EXISTS PricePredictions(id SERIAL PRIMARY KEY, 
