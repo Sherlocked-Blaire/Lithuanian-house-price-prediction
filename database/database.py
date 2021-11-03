@@ -1,4 +1,4 @@
-from decouple import config
+import os
 import json
 import pandas as pd
 import psycopg2
@@ -7,15 +7,14 @@ import psycopg2.extras as extras
 
 class Database:   
     connection = psycopg2.connect(
-    host=config("host"),
-    user=config("user"),
-    port=config("port"),
-    database=config("database"),
-    password=config("password"))
+    host=os.environ.get("host"),
+    user=os.environ.get("user"),
+    port=os.environ.get("port"),
+    database=os.environ.get("database"),
+    password=os.environ.get("password"))
     connection.autocommit = True
     cursor = connection.cursor()
   
-    
     def setup_table(self):
         input_and_output_table_query = """ CREATE TABLE IF NOT EXISTS PricePredictions(id SERIAL PRIMARY KEY, 
                                 neighbourhood TEXT,Area FLOAT, Number_of_rooms INTEGER,
@@ -30,6 +29,11 @@ class Database:
         except Exception as error:
             raise error
     def add_prediction_result_to_database(self, df: pd.DataFrame) -> None:
+        
+        """
+        Adds  predictions to the database
+        :return: None
+        """
        
         try:
             tuples = [tuple(x) for x in df.to_numpy()]
